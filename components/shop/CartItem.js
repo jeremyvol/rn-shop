@@ -23,16 +23,15 @@ const CartItem = props => {
       </View>
       <View style={styles.itemData}>
         <Text style={styles.mainText}>${props.amount.toFixed(2)}</Text>
-        <TouchableComponent
-          onPress={props.onRemove}
-          style={styles.deleteButton}
-        >
-          <Ionicons
-            name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
-            size={23}
-            color="red"
-          />
-        </TouchableComponent>
+        <View style={styles.deleteButton}>
+          <TouchableComponent onPress={props.onRemove}>
+            <Ionicons
+              name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
+              size={23}
+              color="red"
+            />
+          </TouchableComponent>
+        </View>
       </View>
     </View>
   );
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
 
-  deleteButton: { marginLeft: 20 }
+  deleteButton: { marginLeft: 10 }
 });
 
 export default CartItem;
