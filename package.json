@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.0",
     "@react-native-community/masked-view": "0.1.5",
     "expo": "~36.0.0",
     "expo-font": "~8.0.0",
@@ -20,11 +21,11 @@
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.2.2",
+    "react-navigation-drawer": "^2.4.11",
     "react-navigation-header-buttons": "^3.0.5",
     "react-navigation-stack": "^2.2.3",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5",
-    "@expo/vector-icons": "^10.0.0"
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.0.0",
