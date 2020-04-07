@@ -1,18 +1,7 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  Platform
-} from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform } from 'react-native';
 
-import COLORS from '../../constants/Colors';
-
-const ProductItem = props => {
+const ProductItem = (props) => {
   let TouchableComponent = TouchableOpacity;
   if (Platform.OS === 'android' && Platform.Version >= 21) {
     TouchableComponent = TouchableNativeFeedback;
@@ -21,7 +10,7 @@ const ProductItem = props => {
   return (
     <View style={styles.product}>
       {/* <View style={styles.touchable}> */}
-      <TouchableComponent onPress={props.onViewDetail} useForeground>
+      <TouchableComponent onPress={props.onSelect} useForeground>
         <View>
           <View style={styles.imageContainer}>
             <Image style={styles.image} source={{ uri: props.image }} />
@@ -32,18 +21,7 @@ const ProductItem = props => {
             <Text style={styles.price}>${props.price.toFixed(2)}</Text>
           </View>
 
-          <View style={styles.actions}>
-            <Button
-              color={COLORS.primary}
-              title="View Details"
-              onPress={props.onViewDetail}
-            />
-            <Button
-              color={COLORS.primary}
-              title="To Cart"
-              onPress={props.onAddToCart}
-            />
-          </View>
+          <View style={styles.actions}>{props.children}</View>
         </View>
       </TouchableComponent>
       {/* </View> */}
@@ -62,7 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 300,
     margin: 20,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   // touchable: {
   //   borderRadius: 10
@@ -72,33 +50,33 @@ const styles = StyleSheet.create({
     height: '60%',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   details: {
     alignItems: 'center',
-    height: '15%'
+    height: '15%',
   },
   title: {
     fontFamily: 'open-sans-bold',
     fontSize: 18,
-    marginVertical: 2
+    marginVertical: 2,
   },
   price: {
     fontFamily: 'open-sans',
     fontSize: 14,
-    color: '#888'
+    color: '#888',
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '25%',
-    paddingHorizontal: 20
-  }
+    paddingHorizontal: 20,
+  },
   // button: {
   //    backgroundColor: Platform.OS === 'android' ? COLORS.primary : 'white',
   // color: Platform.OS === 'android' ? 'white' : COLORS.primary
