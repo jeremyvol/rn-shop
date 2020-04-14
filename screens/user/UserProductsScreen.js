@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Button, Platform } from 'react-native';
+import { FlatList, Button, Platform, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -9,19 +9,30 @@ import ProductItem from '../../components/shop/ProductItem';
 import COLORS from '../../constants/Colors';
 import * as productsActions from '../../store/actions/products';
 
-const UserProductsScreen = (props) => {
-  const userProducts = useSelector((state) => state.products.userProducts);
+const UserProductsScreen = props => {
+  const userProducts = useSelector(state => state.products.userProducts);
   const dispatch = useDispatch();
 
-  const editProductHandler = (productId) => {
+  const editProductHandler = productId => {
     props.navigation.navigate('EditProduct', { productId: productId });
+  };
+
+  const deleteHandler = productId => {
+    Alert.alert('Are you sure?', 'Do you really want to delete this item?', [
+      { text: 'No', style: 'default' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: () => dispatch(productsActions.deleteProduct(productId)),
+      },
+    ]);
   };
 
   return (
     <FlatList
       data={userProducts}
-      keyExtractor={(item) => item.id}
-      renderItem={(itemData) => (
+      keyExtractor={item => item.id}
+      renderItem={itemData => (
         <ProductItem
           image={itemData.item.imageUrl}
           title={itemData.item.title}
@@ -36,20 +47,14 @@ const UserProductsScreen = (props) => {
               editProductHandler(itemData.item.id);
             }}
           />
-          <Button
-            color={COLORS.primary}
-            title="Delete"
-            onPress={() => {
-              dispatch(productsActions.deleteProduct(itemData.item.id));
-            }}
-          />
+          <Button color={COLORS.primary} title="Delete" onPress={deleteHandler.bind(this, itemData.item.id)} />
         </ProductItem>
       )}
     />
   );
 };
 
-UserProductsScreen.navigationOptions = (navData) => {
+UserProductsScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Your Products',
     headerLeft: () => (
