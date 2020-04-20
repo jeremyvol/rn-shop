@@ -28,6 +28,15 @@ const ProductsOverviewScreen = props => {
   }, [dispatch, setIsLoading, setError]);
 
   useEffect(() => {
+    // reload data every time we re-enter the page
+    const willFocusSub = props.navigation.addListener('willFocus', loadProducts);
+    return () => {
+      willFocusSub.remove();
+    };
+  }, [loadProducts]);
+
+  useEffect(() => {
+    // fetch the product initially
     loadProducts();
   }, [dispatch, loadProducts]);
 

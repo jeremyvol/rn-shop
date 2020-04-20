@@ -32,9 +32,9 @@ const Input = props => {
 
   const { onInputChange, id } = props;
   useEffect(() => {
-    if (inputState.touched) {
-      onInputChange(id, inputState.value, inputState.isValid);
-    }
+    // if (inputState.touched) {
+    onInputChange(id, inputState.value, inputState.isValid);
+    // }
   }, [inputState, onInputChange, id]);
 
   const textChangeHandler = text => {
